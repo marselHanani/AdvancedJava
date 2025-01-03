@@ -1,0 +1,30 @@
+package DesignPrinciples.CompositionOverInheritance.problem;
+/*
+#Problems with Inheritance (Summary):
+!-Interface Constraint: Subclasses must implement all abstract methods of the superclass, even if they are unnecessary.
+!-Behavior Compatibility: Overridden methods must maintain compatibility with the superclass to avoid breaking code that expects the superclass.
+!-Encapsulation Violation: Inheritance exposes the internal details of the superclass to subclasses, potentially leading to tighter coupling and reduced flexibility.
+!-Tight Coupling: Subclasses depend heavily on superclasses, so changes in the superclass can break subclass functionality.
+!-Hierarchy Bloat: Reusing code via inheritance in multi-dimensional cases leads to parallel inheritance hierarchies, causing excessive and complex class combinations.
+ */
+// فئة أساسية تحتوي على خصائص السيارة
+class Vehicle {
+    public void drive() {
+        System.out.println("Driving the vehicle");
+    }
+}
+
+// فئة Car ترث السلوك من Vehicle
+class Car extends Vehicle {
+    public void honk() {
+        System.out.println("Honking the car horn");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Car car = new Car();
+        car.drive(); // من Vehicle
+        car.honk();  // من Car
+    }
+}
