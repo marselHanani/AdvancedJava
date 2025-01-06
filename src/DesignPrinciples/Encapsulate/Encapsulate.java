@@ -30,7 +30,7 @@ class ShoppingCarts {
     }
 
     public void checkout(int amount) {
-        PaymentStrategy.pay(amount);  // استخدام طريقة الدفع المتاحة
+        paymentStrategy.pay(amount);  // استخدام طريقة الدفع المتاحة
     }
 }
 public class Encapsulate {
