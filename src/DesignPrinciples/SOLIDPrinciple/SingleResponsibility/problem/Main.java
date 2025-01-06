@@ -1,6 +1,6 @@
 package DesignPrinciples.SOLIDPrinciple.SingleResponsibility.problem;
 
-/*
+/* what the problem that single responsibility comes to solve it ?
 *Complexity Increases: Classes grow too large as the program expands.
 *Hard to Maintain: Understanding and managing large classes becomes difficult.
 *Slow Navigation: Finding specific code in monolithic classes wastes time.
