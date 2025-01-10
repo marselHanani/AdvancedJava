@@ -10,45 +10,61 @@ package DesignPatterns.Creational.Factory.Solution;
 //*Flexibility: Easy to add new object types without changing client code.
 
 // Abstract class for vehicle (common interface)
+// الخطوة 1: إنشاء واجهة أو فئة مجردة تمثل المنتج
 interface Vehicle {
     void drive();
 }
 
-// Concrete classes for vehicles
+// الخطوة 2: إنشاء الفئات التي تمثل المنتجات الملموسة (Concrete Products)
 class Car implements Vehicle {
     @Override
     public void drive() {
-        System.out.println("Driving a car...");
+        System.out.println("Driving a car.");
     }
 }
 
-class Truck implements Vehicle {
+class Motorcycle implements Vehicle {
     @Override
     public void drive() {
-        System.out.println("Driving a truck...");
+        System.out.println("Riding a motorcycle.");
     }
 }
 
-// Factory class that will create vehicles
-class VehicleFactory {
-    public static Vehicle createVehicle(String type) {
-        // Factory decides which vehicle to create based on input type
-        if (type.equals("car")) {
-            return new Car();
-        } else if (type.equals("truck")) {
-            return new Truck();
-        } else {
-            throw new IllegalArgumentException("Unknown vehicle type");
-        }
+// الخطوة 3: إنشاء الفئة المجردة التي تحتوي على Factory Method
+abstract class VehicleFactory {
+    // Factory Method
+    public abstract Vehicle createVehicle();
+
+    public void deliverVehicle() {
+        Vehicle vehicle = createVehicle();
+        vehicle.drive();
     }
 }
 
-// Client class that uses the factory
-class VehicleClient {
-    public void createVehicle(String type) {
-        // Client uses the factory to create the vehicle
-        Vehicle vehicle = VehicleFactory.createVehicle(type);
-        vehicle.drive();  // Client only interacts with the common interface (Vehicle)
+// الخطوة 4: إنشاء الفئات الملموسة التي تحقق من الفئة المجردة وتوفر المنتجات المناسبة
+class CarFactory extends VehicleFactory {
+    @Override
+    public Vehicle createVehicle() {
+        return new Car();
     }
 }
 
+class MotorcycleFactory extends VehicleFactory {
+    @Override
+    public Vehicle createVehicle() {
+        return new Motorcycle();
+    }
+}
+
+// الخطوة 5: استخدام Factory Method
+public class Client {
+    public static void main(String[] args) {
+        // إنشاء مصنع سيارة
+        VehicleFactory carFactory = new CarFactory();
+        carFactory.deliverVehicle(); // سيتم إنشاء سيارة وقيادتها
+
+        // إنشاء مصنع دراجة نارية
+        VehicleFactory motorcycleFactory = new MotorcycleFactory();
+        motorcycleFactory.deliverVehicle(); // سيتم إنشاء دراجة نارية وركوبها
+    }
+}
